@@ -5,7 +5,7 @@ pause() {
 
 installerVersion="1.0.0"
 
-echo "Augur Setup Assistant (v$installerVersion)"
+echo "Augur Setup Dependency Assistant (v$installerVersion)"
 echo ""
 pause "Press Any Key to Begin..."
 echo ""
@@ -13,7 +13,7 @@ echo ""
 ###########
 # Phase 1 #
 ###########
-echo "Beginning Phase 1 of 4 - Install Dependencies"
+echo "Beginning Phase \"Ensure Dependencies\""
 echo ""
 
 command_is_present() {
@@ -28,39 +28,26 @@ ensure_command_is_present() {
 }
 
 declare -a dependencies
-dependencies[0]="grep"
-dependencies[1]="cat"
-dependencies[2]="ls"
-# Simulate a missing dependency
-dependencies[3]="foo"
+dependencies[1]="python"
+dependencies[2]="pip"
+dependencies[3]="flask"
+dependencies[4]="psql"
+dependencies[5]="node"
+dependencies[6]="npm"
+dependencies[7]="vue" # Ensures both Vue.js and Vue CLI
+dependencies[8]="make"
 
 for currentCommand in "${dependencies[@]}"
     do ensure_command_is_present $currentCommand
 done
 
 echo ""
-echo "Phase 1 Complete!"
+echo "Phase \"Ensure Dependencies\" Complete!"
 
-###########
-# Phase 2 #
-###########
-echo "Beginning Phase 2 of 4 - Setup Augur Database"
+##############################################################
+# Setup Phases, Defer to Existing Python Installation Script #
+##############################################################
 echo ""
-echo "Phase 2 Complete!"
-
-###########
-# Phase 3 #
-###########
-echo "Beginning Phase 3 of 4 - Setup Augur Backend"
-echo ""
-echo "Phase 3 Complete!"
-
-###########
-# Phase 4 #
-###########
-echo "Beginning Phase 4 of 4 - Setup Augur Frontend"
-echo ""
-echo "Phase 4 Complete!"
-
-echo ""
-echo "Augur Installation Complete!"
+echo "Finished Dependency Checking, Ready to Run 'python setup.py install'"
+pause "Press any key to automatically run setup.py..."
+python setup.py install
